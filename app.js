@@ -4,13 +4,11 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const __projectPath = require('./utils/path')
 const products = []
-// make public folder to be accessed 
 app.use(express.static(path.join(__projectPath , 'public')))
 app.use(bodyParser.urlencoded({extended:true}))
 
 app.get('/add-product' , (req,res,next)=>{
     res.send(form)
-    res.end()
 })
 app.post('/add-product' , (req,res,next)=>{
     products.push(req.body.product)
@@ -19,15 +17,10 @@ app.post('/add-product' , (req,res,next)=>{
 
 
 app.get('/' , (req,res,next)=>{
-    if(products.length!==0 ) {
-        res.send(listProducrs(products))
-    } else {
-        res.write('<h1>No Products yet</h1>')
-    }
-    res.end()
+    res.sendFile(path.join(__projectPath ,'views' , 'main.html'))
 })
 
-app.listen(9000)
+app.listen(3000)
 
 
 
